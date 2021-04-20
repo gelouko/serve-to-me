@@ -1,0 +1,20 @@
+{
+  "name": "serve-to-me",
+  "version": "0.0.1",
+  "description": "Server part of the talk-to-me app",
+  "main": "server.js",
+  "scripts": {
+    "test": "yarn test"
+  },
+  "author": "gelouko",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "ws": "^7.4.5"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.11",
+    "@types/ws": "^7.4.1",
+    "typescript": "^4.2.4"
+  }
+}
