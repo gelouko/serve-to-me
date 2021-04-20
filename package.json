@@ -2,7 +2,7 @@
   "name": "serve-to-me",
   "version": "0.0.1",
   "description": "Server part of the talk-to-me app",
-  "main": "server.js",
+  "main": "server.ts",
   "scripts": {
     "test": "yarn test"
   },
