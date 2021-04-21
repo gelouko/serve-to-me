@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as http from 'http';
 import * as WebSocket from 'ws';
-import { addUser, sendMessage, removeUser } from './src/Chat';
+import { addUser, sendMessage, updateUser, removeUser } from './src/Chat';
 import { User } from './src/Interfaces';
 
 const port = process.env.PORT || 9000;
@@ -15,7 +15,8 @@ const socketsConfig: { [key:string]: { socket: WebSocket, user: User } } = {}
 
 const actions: { [key:string]: (user: User) => User[] } = {
     open: addUser,
-    message: sendMessage
+    message: sendMessage,
+    update: updateUser
 }
 
 wss.on('connection', (ws: any) => {

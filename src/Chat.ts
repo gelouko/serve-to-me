@@ -4,10 +4,13 @@ const appState: AppState = {
   users: [],
 }
 
+const getDistance = (user: User, currentUser: User): number => 
+  Math.abs(currentUser.position[0] - user.position[0]) + Math.abs(currentUser.position[1] - user.position[1])
+
 const getDistances = (currentUser: User): { [key:string]:number; } => {
   return appState.users.reduce((acc, user) => ({
     ...acc,
-    [user.name]: Math.abs(currentUser.position[0] - user.position[0]) + Math.abs(currentUser.position[1] - user.position[1])
+    [user.name]: getDistance(user, currentUser)
   }), {})
 }
 
@@ -17,6 +20,23 @@ const addUser = (currentUser: User): User[] => {
   appState.users.push({ name, position, message, distances: getDistances(currentUser) });
 
   console.log('usersqty', appState.users.length);
+  return appState.users;
+}
+
+const updateUser = (currentUser: User): User[] => {
+  appState.users.forEach((user: User) => {
+    if (!user.distances) {
+      user.distances = {}
+    }
+    user.distances[currentUser.name] = getDistance(user, currentUser);
+    console.log('user', user, 'curr', currentUser);
+
+    if (user.name === currentUser.name) {
+      user.message = currentUser.message;
+      user.position = currentUser.position;
+    }
+  });
+
   return appState.users;
 }
 
@@ -49,5 +69,5 @@ const removeUser = (currentUser: User) => {
 }
 
 export {
-  addUser, sendMessage, removeUser
+  addUser, sendMessage, removeUser, updateUser
 }
