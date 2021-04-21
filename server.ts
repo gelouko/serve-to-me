@@ -40,15 +40,14 @@ wss.on('connection', (ws: any) => {
     });
 
     ws.on('close', (e: CloseEvent) => {
-        console.log('Received close!', e);
-
-        console.log(socketsConfig[ws.userName])
         const newUsers = removeUser(socketsConfig[ws.userName].user);
         delete socketsConfig[ws.userName];
 
         Object.values(socketsConfig).forEach((socketConfig: { socket: WebSocket, user: User }) => {
             socketConfig.socket.send(JSON.stringify(newUsers))
         })
+
+        console.log(`Connection for ${ws.userName} closed.`)
     });
 });
 

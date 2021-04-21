@@ -19,7 +19,6 @@ const addUser = (currentUser: User): User[] => {
   
   appState.users.push({ name, position, message, distances: getDistances(currentUser) });
 
-  console.log('usersqty', appState.users.length);
   return appState.users;
 }
 
@@ -29,7 +28,6 @@ const updateUser = (currentUser: User): User[] => {
       user.distances = {}
     }
     user.distances[currentUser.name] = getDistance(user, currentUser);
-    console.log('user', user, 'curr', currentUser);
 
     if (user.name === currentUser.name) {
       user.message = currentUser.message;
@@ -43,13 +41,9 @@ const updateUser = (currentUser: User): User[] => {
 const sendMessage = (currentUser: User): User[] => {
   appState.users.forEach((user: User) => {
     if (user.name === currentUser.name) {
-      console.log('currentUserSendingMessage:', currentUser);
-
       user.message = currentUser.message;
     }
   });
-
-  console.log('usersqtymsg', appState.users.length);
 
   return appState.users;
 }
